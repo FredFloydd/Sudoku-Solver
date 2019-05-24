@@ -1,19 +1,7 @@
 import math
 
-def get_puzzle():
-	print()
-	dimensions = int(input('Sudoku Dimensions: '))
-	print('Enter values, for an empty box just press enter')
-	print()
-	values = []
-	for n in range(dimensions):
-		for m in range(dimensions):
-			value = input('Row ' + str(n+1) + ', Column ' + str(m+1) + ': ')
-			try: 
-				value = int(value)
-				values.append(value)
-			except ValueError:
-				values.append(0)
+def get_puzzle(values):
+	dimensions = int(len(values) ** 0.5)
 	puzzle = []
 	for n in range(dimensions):
 		line = values[n * dimensions : (n+1) * dimensions]
@@ -48,9 +36,8 @@ def check_box(puzzle, row, column):
 	return options
 
 
-def solve_puzzle():
-	#puzzle = get_puzzle()
-	puzzle = [[1,0,2,0], [0,3,0,4], [0,2,4,0], [0,1,0,0]]
+def solve_puzzle(values):
+	puzzle = get_puzzle(values)
 	finished = False
 	while not finished:
 		for i in range(len(puzzle)):
@@ -66,5 +53,10 @@ def solve_puzzle():
 	for i in range(len(puzzle)):
 		print(puzzle[i])
 
-solve_puzzle()
+values = []
+line = '001700509573024106800501002700295018009400305652800007465080071000159004908007053'
+for i in range(len(line)):
+	values.append(int(line[i]))
+
+solve_puzzle(values)
 
