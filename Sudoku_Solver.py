@@ -29,7 +29,7 @@ def check_box(puzzle, row, column):
 	box = []
 	for n in range(sqrtdimensions):
 		for m in range(sqrtdimensions):
-			box.append(puzzle[box_column * sqrtdimensions + n][box_row * sqrtdimensions + m])
+			box.append(puzzle[box_row * sqrtdimensions + n][box_column * sqrtdimensions + m])
 	for o in range(dimensions):
 		a = True
 		b = True
@@ -43,7 +43,7 @@ def check_box(puzzle, row, column):
 		for k in range(dimensions):
 			if box[k] == o+1:
 				c = False
-		if a == True and b == True and c == True:
+		if a and b and c:
 			options.append(o+1)
 	return options
 
@@ -52,7 +52,7 @@ def solve_puzzle():
 	#puzzle = get_puzzle()
 	puzzle = [[1,0,2,0], [0,3,0,4], [0,2,4,0], [0,1,0,0]]
 	finished = False
-	while finished == False:
+	while not finished:
 		for i in range(len(puzzle)):
 			for j in range(len(puzzle)):
 				if puzzle[i][j] == 0:
@@ -62,11 +62,7 @@ def solve_puzzle():
 		for i in range(len(puzzle)):
 			for j in range(len(puzzle)):
 				values.append(puzzle[i][j])
-		if all(values) == True:
-			finished = False
-		else:
-			finished = True
-		values = []
+		finished = all(values)
 	for i in range(len(puzzle)):
 		print(puzzle[i])
 
